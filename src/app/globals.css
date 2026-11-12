@@ -1,26 +1,86 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #fafaf9;
+  --surface: #ffffff;
+  --surface-2: #f4f4f2;
+  --text: #18181b;
+  --muted: #5b5b66;
+  --border: #e6e6e3;
+  --accent: #4f46e5;
+  --accent-soft: #eef0ff;
+  --accent-text: #ffffff;
+  --good: #047857;
+  color-scheme: light;
+}
+
+/* Dark follows the system unless the visitor picked a theme with the toggle. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b0b0f;
+    --surface: #131318;
+    --surface-2: #1a1a21;
+    --text: #ececf1;
+    --muted: #a1a1ad;
+    --border: #26262f;
+    --accent: #8b87ff;
+    --accent-soft: #1d1c35;
+    --accent-text: #0b0b0f;
+    --good: #34d399;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #0b0b0f;
+  --surface: #131318;
+  --surface-2: #1a1a21;
+  --text: #ececf1;
+  --muted: #a1a1ad;
+  --border: #26262f;
+  --accent: #8b87ff;
+  --accent-soft: #1d1c35;
+  --accent-text: #0b0b0f;
+  --good: #34d399;
+  color-scheme: dark;
+}
+
+@custom-variant dark {
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) & {
+      @slot;
+    }
+  }
+  :root[data-theme="dark"] & {
+    @slot;
+  }
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-text: var(--accent-text);
+  --color-good: var(--good);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+summary::-webkit-details-marker {
+  display: none;
 }
